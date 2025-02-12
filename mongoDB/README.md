@@ -470,3 +470,218 @@ module.exports = router;
     -   `GET http://localhost:3002/books`
 
 All three projects demonstrate CRUD operations, error handling, and Mongoose model validation. They can be easily extended with additional features if time permits! 🚀
+
+# assessment questions
+
+### Basic Questions (15)
+
+1.  What is MongoDB?
+
+    -   MongoDB is a NoSQL database that stores data in flexible, JSON-like documents.
+    -   It is schema-less and supports dynamic queries, making it ideal for unstructured or semi-structured data.
+2.  What is a document in MongoDB?
+
+    -   A document is a BSON (Binary JSON) object that represents a single record in MongoDB.
+    -   Documents are stored in collections, similar to rows in relational databases.
+3.  What is a collection in MongoDB?
+
+    -   A collection is a group of documents stored in MongoDB, analogous to tables in relational databases.
+    -   Collections do not enforce a strict schema, allowing flexibility in document structure.
+4.  What is Mongoose?
+
+    -   Mongoose is an ODM (Object Data Modeling) library for MongoDB and Node.js.
+    -   It provides schema validation, middleware, and easier querying for MongoDB.
+5.  What is the difference between SQL and NoSQL databases?
+
+    -   SQL databases use structured tables with predefined schemas, while NoSQL databases like MongoDB store data in flexible documents.
+    -   NoSQL databases are better suited for scalability and handling unstructured data.
+6.  What is BSON in MongoDB?
+
+    -   BSON (Binary JSON) is a binary-encoded serialization of JSON-like documents used by MongoDB.
+    -   It supports additional data types like dates and binary data, which are not natively supported in JSON.
+7.  How do you connect to a MongoDB database using Mongoose?
+
+    -   Use `mongoose.connect('mongodb://<connection-string>')` to establish a connection.
+    -   Example: `mongoose.connect('mongodb://localhost:27017/mydb')`.
+8.  What is the purpose of the `_id` field in MongoDB?
+
+    -   The `_id` field is a unique identifier for each document in a collection.
+    -   If not provided, MongoDB automatically generates an ObjectId for the `_id`.
+9.  What is an ObjectId in MongoDB?
+
+    -   An ObjectId is a 12-byte identifier used as the default value for the `_id` field.
+    -   It consists of a timestamp, machine identifier, process ID, and random value.
+10. How do you insert a document into a MongoDB collection?
+
+    -   Use the `insertOne()` or `insertMany()` methods.
+    -   Example: `db.collection.insertOne({ name: "John", age: 30 })`.
+11. How do you query documents in MongoDB?
+
+    -   Use the `find()` method with optional filter criteria.
+    -   Example: `db.collection.find({ age: { $gt: 25 } })`.
+12. What is the `find()` method in MongoDB?
+
+    -   The `find()` method retrieves all documents that match a query.
+    -   It returns a cursor, which can be iterated to access results.
+13. What is the `findOne()` method in MongoDB?
+
+    -   The `findOne()` method retrieves the first document that matches a query.
+    -   Example: `db.collection.findOne({ name: "John" })`.
+14. How do you update a document in MongoDB?
+
+    -   Use the `updateOne()` or `updateMany()` methods with a filter and update operation.
+    -   Example: `db.collection.updateOne({ name: "John" }, { $set: { age: 35 } })`.
+15. How do you delete a document in MongoDB?
+
+    -   Use the `deleteOne()` or `deleteMany()` methods with a filter.
+    -   Example: `db.collection.deleteOne({ name: "John" })`.
+
+* * * * *
+
+### Intermediate Questions (20)
+
+1.  What is indexing in MongoDB?
+
+    -   Indexing improves query performance by creating a data structure that allows faster lookups.
+    -   Example: `db.collection.createIndex({ name: 1 })`.
+2.  What is the difference between `createIndex` and `ensureIndex`?
+
+    -   `createIndex` creates a new index if it doesn't exist, while `ensureIndex` is deprecated and replaced by `createIndex`.
+    -   Always use `createIndex` in modern MongoDB versions.
+3.  What is aggregation in MongoDB?
+
+    -   Aggregation processes data records and returns computed results, such as sums, averages, or grouped data.
+    -   Example: `db.collection.aggregate([{ $group: { _id: "$category", total: { $sum: "$price" } } }])`.
+4.  What is the `$match` stage in aggregation?
+
+    -   The `$match` stage filters documents based on specified criteria.
+    -   Example: `{ $match: { age: { $gt: 25 } } }`.
+5.  What is the `$group` stage in aggregation?
+
+    -   The `$group` stage groups documents by a specified key and performs calculations like sum or average.
+    -   Example: `{ $group: { _id: "$category", total: { $sum: "$price" } } }`.
+6.  What is sharding in MongoDB?
+
+    -   Sharding distributes data across multiple servers to improve scalability and performance.
+    -   It splits large datasets into smaller chunks called shards.
+7.  What is replication in MongoDB?
+
+    -   Replication maintains multiple copies of data across different servers for fault tolerance.
+    -   A replica set consists of primary and secondary nodes.
+8.  What is the role of the primary node in a replica set?
+
+    -   The primary node handles all write operations and replicates changes to secondary nodes.
+    -   Secondary nodes can serve read operations if configured.
+9.  What is the `populate()` method in Mongoose?
+
+    -   The `populate()` method replaces references (e.g., ObjectIds) with actual documents from another collection.
+    -   Example: `User.findById(id).populate('posts')`.
+10. What is a schema in Mongoose?
+
+    -   A schema defines the structure of documents, including fields, data types, and validation rules.
+    -   Example: `const userSchema = new mongoose.Schema({ name: String, age: Number })`.
+11. What is middleware in Mongoose?
+
+    -   Middleware are functions executed before or after certain lifecycle events, such as saving or validating a document.
+    -   Example: `schema.pre('save', function(next) { ... })`.
+12. What are virtuals in Mongoose?
+
+    -   Virtuals are document properties that are not stored in the database but computed dynamically.
+    -   Example: `userSchema.virtual('fullName').get(() =>` this.firstName{this.lastName}`)`.
+13. What is the difference between `save()` and `insertMany()` in Mongoose?
+
+    -   `save()` persists a single document instance, while `insertMany()` inserts multiple documents at once.
+    -   Use `insertMany()` for bulk inserts to improve performance.
+14. What is the purpose of the `timestamps` option in Mongoose?
+
+    -   The `timestamps` option automatically adds `createdAt` and `updatedAt` fields to documents.
+    -   Example: `const schema = new Schema({}, { timestamps: true })`.
+15. What is the difference between `findByIdAndUpdate` and `findOneAndUpdate`?
+
+    -   `findByIdAndUpdate` updates a document by its `_id`, while `findOneAndUpdate` uses any filter criteria.
+    -   Example: `Model.findByIdAndUpdate(id, { $set: { name: "John" } })`.
+16. What is the `lean()` method in Mongoose?
+
+    -   The `lean()` method returns plain JavaScript objects instead of Mongoose documents, improving performance.
+    -   Example: `Model.find().lean()`.
+17. What is the `distinct()` method in MongoDB?
+
+    -   The `distinct()` method retrieves unique values for a specified field.
+    -   Example: `db.collection.distinct("category")`.
+18. What is the `$lookup` stage in aggregation?
+
+    -   The `$lookup` stage performs a left outer join with another collection.
+    -   Example: `{ $lookup: { from: "orders", localField: "userId", foreignField: "_id", as: "userOrders" } }`.
+19. What is the `$unwind` stage in aggregation?
+
+    -   The `$unwind` stage deconstructs an array field into separate documents for each element.
+    -   Example: `{ $unwind: "$tags" }`.
+20. What is the difference between `drop()` and `deleteMany()`?
+
+    -   `drop()` deletes an entire collection, while `deleteMany()` removes specific documents.
+    -   Use `drop()` with caution, as it cannot be undone.
+
+* * * * *
+
+### Advanced Questions (15)
+
+1.  What is TTL (Time-To-Live) in MongoDB?
+
+    -   TTL indexes automatically remove documents after a specified duration.
+    -   Example: `db.collection.createIndex({ createdAt: 1 }, { expireAfterSeconds: 3600 })`.
+2.  What is the `explain()` method in MongoDB?
+
+    -   The `explain()` method provides detailed information about query execution plans.
+    -   Example: `db.collection.find().explain("executionStats")`.
+3.  What is the difference between `capped collections` and regular collections?
+
+    -   Capped collections have a fixed size and overwrite old documents when full, while regular collections grow indefinitely.
+    -   Use capped collections for logging or caching.
+4.  What is the `bulkWrite()` method in MongoDB?
+
+    -   The `bulkWrite()` method performs multiple write operations in a single request.
+    -   Example: `db.collection.bulkWrite([{ insertOne: { document: { name: "John" } } }])`.
+5.  What is the `changeStream` API in MongoDB?
+
+    -   The `changeStream` API listens for real-time changes to documents in a collection.
+    -   Example: `const changeStream = db.collection.watch()`.
+6.  What is the difference between `embedded` and `referenced` relationships in MongoDB?
+
+    -   Embedded relationships store related data within the same document, while referenced relationships link documents via ObjectIds.
+    -   Use embedding for one-to-few relationships and referencing for one-to-many.
+7.  What is the `text` index in MongoDB?
+
+    -   A `text` index enables full-text search on string fields.
+    -   Example: `db.collection.createIndex({ description: "text" })`.
+8.  What is the `hint()` method in MongoDB?
+
+    -   The `hint()` method forces MongoDB to use a specific index for a query.
+    -   Example: `db.collection.find().hint({ name: 1 })`.
+9.  What is the `collation` option in MongoDB?
+
+    -   The `collation` option specifies language-specific rules for string comparison, such as case insensitivity.
+    -   Example: `db.collection.find({}, { collation: { locale: "en", strength: 2 } })`.
+10. What is the `gridfs` module in MongoDB?
+
+    -   GridFS is a specification for storing and retrieving large files, such as images or videos, exceeding the BSON size limit.
+    -   It splits files into chunks and stores them in separate collections.
+11. What is the `pre` and `post` middleware in Mongoose?
+
+    -   `pre` middleware runs before an operation (e.g., save), while `post` middleware runs after.
+    -   Example: `schema.post('save', function(doc) { console.log('Saved:', doc) })`.
+12. What is the `discriminator` feature in Mongoose?
+
+    -   Discriminators allow multiple schemas to share the same collection but differ in structure.
+    -   Example: `const subSchema = new Schema({ type: String }); const SubModel = Base.discriminator('Sub', subSchema)`.
+13. What is the `versionKey` in Mongoose?
+
+    -   The `versionKey` (`__v`) tracks the version of a document to handle optimistic concurrency control.
+    -   You can disable it using `versionKey: false` in the schema options.
+14. What is the `aggregate()` method in Mongoose?
+
+    -   The `aggregate()` method performs complex data transformations using the MongoDB aggregation pipeline.
+    -   Example: `Model.aggregate([{ $group: { _id: "$category", total: { $sum: "$price" } } }])`.
+15. What is the future of MongoDB and Mongoose?
+
+    -   MongoDB continues to evolve with features like serverless deployments, enhanced analytics, and improved security.
+    -   Mongoose is expected to support more advanced TypeScript integrations and performance optimizations.
